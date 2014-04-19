@@ -23,7 +23,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 		@RequestMapping(value="/Welcome", method=RequestMethod.POST)
 	    public ModelAndView userLogin(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpSession sessionID)
 	    {
-			boolean isFormValidationSucccess = validateLoginFields(userName, passWord);
+			boolean isFormValidationSucccess = validateLoginFields(userName, passWord);	
 			if(isFormValidationSucccess == true)
 			{
 				boolean isLoginSuccess = userServiceImpl.validateUser(userName, passWord);
