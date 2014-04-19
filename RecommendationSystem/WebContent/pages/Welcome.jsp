@@ -10,8 +10,16 @@
         margin-top: 60px;
     }
 </style>
+<script type="text/javascript">
+window.history.forward(1);
+function noBack()
+{
+	window.history.forward(); 
+}
+</script>
 </head>
-<body>
+
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onload="">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -34,7 +42,7 @@
                     </li>
                     <li><a href="#contact">Organization Info</a>
                     </li>
-                    <li><a href="#contact">Log out</a>
+                    <li><a href="/RecommendationSystem">Log out</a>
                     </li>
                 </ul>
             </div>
