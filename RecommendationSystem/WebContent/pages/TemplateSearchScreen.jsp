@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,19 +11,18 @@
 
     <title>Starter Template for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <link href="../css/recommendation.css" rel="stylesheet">
     <script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="../js/jquery.autocomplete.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/typeahead.js"></script>
     <script type="text/javascript" src="../js/custom.js"></script>
     <!-- Add custom CSS here -->
     
     <style>
-    body {
-        margin-top: 60px;
-    }
+        body {
+            margin-top: 60px;
+        }
     </style>
 
 </head>
@@ -62,24 +61,23 @@
 
         <div class="row">
             <div class="col-lg-6">
-                <input type="text" name="planets" class="form-control" id="search-template" placeholder="Enter Template Name">
-            </div>
-            <div class="col-lg-2">
-                <button id="add_button" type="button" class="btn btn-default">Add</button>
+             <div id="searchfield">
+                <form><input type="text" name="currency" class="biginput" id="autocomplete"></form>
             </div>
         </div>
-       	<div class="row">
-       		<div class="col-lg-6">
-	       		<div class="added-templates"></div>
-	       		</div>
-       		<div>
-       	</div>
-
+        <div class="col-lg-2">
+            <button id="add_button" type="button" class="btn btn-default add-butt">Add</button>
+        </div>
     </div>
-    <!-- /.container -->
+    <div class="row">
+     <div class="col-lg-6">
+      <div class="added-templates"></div>
+  </div>
+
+</div>
+<!-- /.container -->
 
 
 </body>
 
 </html>
-    
