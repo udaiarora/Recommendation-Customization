@@ -30,7 +30,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 				if(isLoginSuccess == true)
 				{
 					sessionID.setAttribute("userName", userName);
-					return new ModelAndView("/Welcome");
+					return new ModelAndView("/TemplateSearchScreen");
 				}
 			}
 			return new ModelAndView("/index").addObject("loginError", "Invalid UserName or Password!");

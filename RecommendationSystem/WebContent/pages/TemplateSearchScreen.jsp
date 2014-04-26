@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +28,7 @@ pageEncoding="ISO-8859-1"%>
 </head>
 
 <body>
+
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -61,7 +62,7 @@ pageEncoding="ISO-8859-1"%>
 
         <div class="row">
             <div class="col-lg-6">
-             <div id="searchfield">
+               <div id="searchfield">
                 <form><input type="text" name="currency" class="biginput" id="autocomplete"></form>
             </div>
         </div>
@@ -70,12 +71,15 @@ pageEncoding="ISO-8859-1"%>
         </div>
     </div>
     <div class="row">
-     <div class="col-lg-6">
-      <div class="added-templates"></div>
-  </div>
+       <div class="col-lg-6">
+          <div class="added-templates"></div>
+      </div>
 
 </div>
-<!-- /.container -->
+<div class="row">
+        <button id="next_button" type="button" class="btn btn-default">Next</button>
+    </div>
+
 
 
 </body>
