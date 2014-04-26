@@ -21,17 +21,21 @@ public class RecommendationController
 	private RecommendationImpl recommendationImplOBj;
 	
 	@RequestMapping(value="/TemplateSearchScreen", method=RequestMethod.GET)
-    public ModelAndView addTemplates(@RequestParam("templates") Integer[] templates,HttpSession sessionID)
+    public ModelAndView addTemplates(@RequestParam("attribute") String[] templateID,HttpSession sessionID) throws Exception
+	//public ModelAndView addTemplates(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpSession sessionID) throws Exception
     {
 		
-			boolean isAddSuccess = recommendationImplOBj.getTemplates(templates);
+			//boolean isAddSuccess = recommendationImplOBj.getTemplates(templates);
+			boolean isAddSuccess = recommendationImplOBj.getTemplates();
 			if(isAddSuccess == true)
 			{
 				//sessionID.setAttribute("userName", userName);
+				System.out.println("The Service function returned True");
+				System.out.println("The template ID is "+ templateID[0]);
 				return new ModelAndView("/TemplateSearchScreen");
 			}
 			
-		return new ModelAndView("/index").addObject("loginError", "Retry!");
+		return new ModelAndView("/index").addObject("AdditionError", "Retry!");
 	}
 	
 }
