@@ -11,12 +11,12 @@
 
     <title>Starter Template for Bootstrap</title>
 
-    <link href="../css/bootstrap.css" rel="stylesheet">
-    <link href="../css/recommendation.css" rel="stylesheet">
-    <script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="../js/jquery.autocomplete.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/custom.js"></script>
+    <link href="/RecommendationSystem/css/bootstrap.css" rel="stylesheet">
+    <link href="/RecommendationSystem/css/recommendation.css" rel="stylesheet">
+    <script type="text/javascript" src="/RecommendationSystem/js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="/RecommendationSystem/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="/RecommendationSystem/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/RecommendationSystem/js/custom.js"></script>
     <!-- Add custom CSS here -->
     
     <style>
