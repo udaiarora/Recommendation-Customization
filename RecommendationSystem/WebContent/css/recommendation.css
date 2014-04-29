@@ -1,4 +1,12 @@
-.added-templates {
+.hidden {
+	display: none;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.added-templates, .recommended-templates {
 	border: 1px solid #bbbbbb;
 	border-radius: 2px;
 	margin-top: 20px;
@@ -6,65 +14,23 @@
 }
 
 .add-butt {
-	height: 37px;
+	height: 32px;
 	width: 80px;
-	margin-top: 10px;
 }
 
-.autocomplete-suggestions {
-	border: 1px solid #999;
-	background: #fff;
-	cursor: default;
-	overflow: auto;
+.ui-helper-hidden-accessible {
+	display: none;
 }
 
-.autocomplete-suggestion {
-	padding: 10px 5px;
-	font-size: 1.2em;
-	white-space: nowrap;
-	overflow: hidden;
+.added-temp {
+	padding: 10px;
 }
 
-.autocomplete-selected {
-	background: #f0f0f0;
+.added-temp:hover {
+	cursor: pointer;
+	background: #f2f2f2;
 }
 
-.autocomplete-suggestions strong {
-	font-weight: normal;
-	color: #3399ff;
-}
-
-#searchfield {
-	display: block;
-	width: 100%;
-}
-
-#searchfield form {
-	width: 100%; display : inline-block;
-	background: #eeefed;
-	padding: 0;
-	margin: 0;
-	padding: 5px;
-	border-radius: 3px;
-	margin: 5px 0 0 0;
-	display: inline-block;
-}
-
-#searchfield form .biginput {
-	width: 100%;
-	height: 40px;
-	padding: 0 10px 0 10px;
-	background-color: #fff;
-	border: 1px solid #c8c8c8;
-	border-radius: 3px;
-	color: #aeaeae;
-	font-weight: normal;
-	font-size: 1.5em;
-	-webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	transition: all 0.2s linear;
-}
-
-#searchfield form .biginput:focus {
-	color: #858585;
+.added-temp-select {
+	background: #ddddff;
 }

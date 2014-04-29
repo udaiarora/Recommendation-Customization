@@ -13,12 +13,13 @@
 
     <link href="/RecommendationSystem/css/bootstrap.css" rel="stylesheet">
     <link href="/RecommendationSystem/css/recommendation.css" rel="stylesheet">
+    <link href="/RecommendationSystem/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
     <script type="text/javascript" src="/RecommendationSystem/js/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="/RecommendationSystem/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="/RecommendationSystem/js/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript" src="/RecommendationSystem/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/RecommendationSystem/js/custom.js"></script>
     <!-- Add custom CSS here -->
-    
+
     <style>
         body {
             margin-top: 60px;
@@ -60,28 +61,53 @@
 
     <div class="container">
 
-        <div class="row">
+        <div class="row mt-20">
+            <div class="col-lg-6 "><h1>Search Templates</h1></div>
+        </div>
+
+        <div class="row mt-20 search-bar">
             <div class="col-lg-6">
-               <div id="searchfield">
-                <form><input type="text" name="currency" class="biginput" id="autocomplete"></form>
+                <input type="text" class="form-control" id="autocomplete">
+            </div>
+            <div class="col-lg-2">
+                <button id="add_button" type="button" class="btn btn-default add-butt">Add</button>
             </div>
         </div>
-        <div class="col-lg-2">
-            <button id="add_button" type="button" class="btn btn-default add-butt">Add</button>
+
+        <div class="row hidden rec-added-title-container">
+            <div class="col-lg-6">Added</div>
+            <div class="col-lg-6">Recommended</div>
         </div>
-    </div>
-    <div class="row">
-       <div class="col-lg-6">
-          <div class="added-templates"></div>
-      </div>
 
-</div>
-<div class="row">
-        <button id="next_button" type="button" class="btn btn-default">Next</button>
-    </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="added-templates"></div>
+            </div>
+            <div class="col-lg-6 hidden recommended-templates-container">
+                <div class="recommended-templates"></div>
+            </div>
+
+        </div>
+        <div class="row mt-20">
+            <div class="col-lg-1 next-but-container">
+                <button id="next_button" type="button" class="btn btn-default">Next</button>
+            </div>
+            <div class="col-lg-1 hidden back-but-container">
+                <button id="back_button" type="button" class="btn btn-default">Back</button>
+            </div>
+            <div class="col-lg-1 hidden customize_button_container">
+                <button id="customize_button" type="button" class="btn btn-default">Customize</button>
+            </div>
+            <div class="col-lg-4">
+                <button id="delete_button" type="button" class="btn btn-delete">Delete</button>
+            </div>
+            <div class="col-lg-1 hidden rec-add-container">
+                <button id="cust_add_button" type="button" class="btn btn-delete">Add</button>
+            </div>
+        </div>
 
 
 
-</body>
+    </body>
 
-</html>
+    </html>

@@ -1,31 +1,48 @@
+function toReco(){
+	$(".search-bar").slideUp(100);
+	$("h1").html("Recommendations");
+	$(".recommended-templates-container").removeClass("hidden");
+	$(".customize_button_container").removeClass("hidden");
+	$(".rec-add-container").removeClass("hidden");
+	$(".rec-added-title-container").removeClass("hidden");
+	$(".back-but-container").removeClass("hidden");
+	$(".next-but-container").addClass("hidden");
+}
+
+function toAdd(){
+	$(".search-bar").slideDown(100);
+	$("h1").html("Search Templates");
+	$(".recommended-templates-container").addClass("hidden");
+	$(".customize_button_container").addClass("hidden");
+	$(".rec-add-container").addClass("hidden");
+	$(".rec-added-title-container").addClass("hidden");
+	$(".back-but-container").addClass("hidden");
+	$(".next-but-container").removeClass("hidden");
+}
 
 
-var currencies = [
-{ value: 'Afghan afghani', data: 'AFN' },
-{ value: 'Albanian lek', data: 'ALL' },
-{ value: 'Algerian dinar', data: 'DZD' },
-{ value: 'European euro', data: 'EUR' },
-{ value: 'Angolan kwanza', data: 'AOA' },
-{ value: 'East Caribbean dollar', data: 'XCD' },
-{ value: 'Vietnamese dong', data: 'VND' },
-{ value: 'Yemeni rial', data: 'YER' },
-{ value: 'Zambian kwacha', data: 'ZMK' },
-{ value: 'Zimbabwean dollar', data: 'ZWD' }
-];
+$(function() {	
+	$( "#autocomplete" ).autocomplete({
+		source:  dummy
+        });
+});
+
 
 var temps = [{tempid:"12"},{tempid:"332"},{tempid:"44"}];
+var dummy= ["aaaaa","afafas","ffwgwe"];
+var global_temps=[];
 
 $(document).ready(function(){
-	$('#autocomplete').autocomplete({
-		lookup: currencies,
-		onSelect: function (suggestion) {
-  // some function here
-	}
-	});
+	
 
 	$("#add_button").on("click",function(){
-		var d=$("#autocomplete").val();
-		$(".added-templates").append("<div>"+d+"</div>")
+
+		var toadd=$("#autocomplete").val();
+		if(($.inArray(toadd, dummy)+1) && !($.inArray(toadd, global_temps)+1))
+		{
+			$(".added-templates").append("<div class='added-temp'>"+toadd+"</div>");
+			global_temps.push(toadd);
+		}
 	});
 
 	$("#next_button").on("click", function(){
@@ -41,5 +58,54 @@ $(document).ready(function(){
 				console.log("yay");
 			}
 		});
+		//Change view
+		toReco();
 	});
+
+	$("#back_button").on("click", function(){
+		toAdd();
+	});
+
+	$(".added-templates").on("click", ".added-temp", function(){
+		$(this).toggleClass("added-temp-select");
+	});
+
+	$("#delete_button").on("click", function(){
+		$(".added-temp-select").each(function(){
+			global_temps.splice(global_temps.indexOf($(this).text()), 1);
+		}) 
+		
+		$(".added-temp-select").remove();
+	})
+
+
 });
+
+
+/*
+$(function() {
+	
+	$( "#query" ).autocomplete({
+		source:  function(req, add){
+			
+                //pass request to server
+                $.getJSON("/IR_RestfulAPI/rest/home/querycomp?partialquery="+$("#query").val(), req, function(data) {
+                	
+                    //create array for response objects
+                    var suggestions = [];
+                    
+                    //process response
+                    for(i=0; i<5;i++){                             
+                    	suggestions.push(data[i].value);
+                    }
+                    
+         	       //pass array to callback
+         	       add(suggestions);
+         	   });
+                
+            }
+        });
+});
+
+
+*/
