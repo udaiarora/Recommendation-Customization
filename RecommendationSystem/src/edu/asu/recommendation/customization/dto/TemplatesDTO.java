@@ -42,16 +42,16 @@ public class TemplatesDTO implements Serializable {
     private String templateDescription;
     @Column(name = "used_count")
     private Integer usedCount;
-    @OneToMany(mappedBy = "templateId")
+    @OneToMany(mappedBy = "templateID")
     private List<WorkflowComponentDTO> workflowComponentDTOList;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne
-    private UserDTO userId;
-    @OneToMany(mappedBy = "templateId")
+    private UserDTO userID;
+    @OneToMany(mappedBy = "templateID")
     private List<DatamodelComponentDTO> datamodelComponentDTOList;
-    @OneToMany(mappedBy = "templateId")
+    @OneToMany(mappedBy = "templateID")
     private List<ServicesComponentDTO> servicesComponentDTOList;
-    @OneToMany(mappedBy = "templateId")
+    @OneToMany(mappedBy = "templateID")
     private List<GuiComponentDTO> guiComponentDTOList;
 
     public TemplatesDTO() {
@@ -101,12 +101,12 @@ public class TemplatesDTO implements Serializable {
         this.workflowComponentDTOList = workflowComponentDTOList;
     }
 
-    public UserDTO getUserId() {
-        return userId;
+    public UserDTO getUserID() {
+        return userID;
     }
 
-    public void setUserId(UserDTO userId) {
-        this.userId = userId;
+    public void setUserID(UserDTO userID) {
+        this.userID = userID;
     }
 
     public List<DatamodelComponentDTO> getDatamodelComponentDTOList() {

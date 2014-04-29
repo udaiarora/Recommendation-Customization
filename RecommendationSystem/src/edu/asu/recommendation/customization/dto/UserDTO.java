@@ -52,15 +52,15 @@ public class UserDTO implements Serializable {
     private String subscriptionStartDate;
     @Column(name = "subscription_end_date")
     private String subscriptionEndDate;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userID")
     private List<WorkflowComponentDTO> workflowComponentDTOList;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userID")
     private List<TemplatesDTO> templatesDTOList;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userID")
     private List<DatamodelComponentDTO> datamodelComponentDTOList;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userID")
     private List<ServicesComponentDTO> servicesComponentDTOList;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userID")
     private List<GuiComponentDTO> guiComponentDTOList;
 
     public UserDTO() {

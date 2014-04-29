@@ -54,10 +54,10 @@ public class WorkflowComponentDTO implements Serializable {
     private String customizationType;
     @JoinColumn(name = "template_id", referencedColumnName = "template_id")
     @ManyToOne
-    private TemplatesDTO templateId;
+    private TemplatesDTO templateID;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne
-    private UserDTO userId;
+    private UserDTO userID;
 
     public WorkflowComponentDTO() {
     }
@@ -130,20 +130,20 @@ public class WorkflowComponentDTO implements Serializable {
         this.customizationType = customizationType;
     }
 
-    public TemplatesDTO getTemplateId() {
-        return templateId;
+    public TemplatesDTO getTemplateID() {
+        return templateID;
     }
 
-    public void setTemplateId(TemplatesDTO templateId) {
-        this.templateId = templateId;
+    public void setTemplateID(TemplatesDTO templateID) {
+        this.templateID = templateID;
     }
 
-    public UserDTO getUserId() {
-        return userId;
+    public UserDTO getUserID() {
+        return userID;
     }
 
-    public void setUserId(UserDTO userId) {
-        this.userId = userId;
+    public void setUserID(UserDTO userID) {
+        this.userID = userID;
     }
 
     @Override
