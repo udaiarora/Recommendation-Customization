@@ -19,12 +19,22 @@ function toAdd(){
 	$(".back-but-container").addClass("hidden");
 	$(".next-but-container").removeClass("hidden");
 }
+var suggestions=[];
+$.ajax({
+	url:"/RecommendationSystem/GetAutocompleteSuggestions",
+	success:function(response)
+	{
+		for(var i=0; i<response.templateName.length;i++) {
+			suggestions.push(response.templateName[i]);
+		}
+		$(function() {	
+			$( "#autocomplete" ).autocomplete({
+				source:  suggestions
+		        });
 
+		});
 
-$(function() {	
-	$( "#autocomplete" ).autocomplete({
-		source:  dummy
-        });
+	}
 });
 
 
@@ -38,7 +48,7 @@ $(document).ready(function(){
 	$("#add_button").on("click",function(){
 
 		var toadd=$("#autocomplete").val();
-		if(($.inArray(toadd, dummy)+1) && !($.inArray(toadd, global_temps)+1))
+		if(($.inArray(toadd, suggestions)+1) && !($.inArray(toadd, global_temps)+1))
 		{
 			$(".added-templates").append("<div class='added-temp'>"+toadd+"</div>");
 			global_temps.push(toadd);
@@ -73,10 +83,10 @@ $(document).ready(function(){
 	$("#delete_button").on("click", function(){
 		$(".added-temp-select").each(function(){
 			global_temps.splice(global_temps.indexOf($(this).text()), 1);
-		}) 
+		}) ;
 		
 		$(".added-temp-select").remove();
-	})
+	});
 
 
 });

@@ -29,20 +29,20 @@ public class RecommendationController
 	
 	
 	@RequestMapping(value="/GetAutocompleteSuggestions", method=RequestMethod.GET)
-	public @ResponseBody Template getAutoCompleteSuggestions(HttpSession sessionID) throws Exception
+	public @ResponseBody Template getAutoCompleteSuggestions() throws Exception
 	{
 		//boolean isAddSuccess = recommendationImplOBj.getTemplates();
 		//call autocomplete function here
-		String[] return_array=getTemplateNames();
-		return new Template(return_array);
-		/*boolean isAddSuccess=true;
+		//String[] return_array=getTemplateNames();
+		//return new Template(return_array);
+		boolean isAddSuccess=true;
 		if(isAddSuccess == true)
 		{
 			System.out.println("The Service function returned True");
 			return new Template(new String[]{"Template1", "Template2"});
 		}
 		return new Template(new String[]{"FailTemplate1", "FailTemplate2"});
-		*/
+		
 	}
 	
 	@RequestMapping(value="/TemplateSearchScreen", method=RequestMethod.GET)
@@ -64,7 +64,7 @@ public class RecommendationController
 			return new Template(new String[]{"SuccessTemplate"});
 	}
 	
-	public String[] getTemplateNames() throws Exception
+	/*public String[] getTemplateNames() throws Exception
 	{
 	@SuppressWarnings("resource")
 	BufferedReader reader = new BufferedReader(new FileReader("G:\\Spring 2014\\Software Design\\Recommendation-Customization\\RecommendationSystem\\WebContent\\Template.csv"));
@@ -86,6 +86,6 @@ public class RecommendationController
 		 tempnames[i]= hm.get(list.get(i));
 	}
 	return templateNames;
-	}
+	}*/
 	
 }
