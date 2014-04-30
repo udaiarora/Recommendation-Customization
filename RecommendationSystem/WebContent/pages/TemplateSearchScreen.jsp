@@ -9,8 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Starter Template for Bootstrap</title>
-
+    <title>Recommendation and Customization Engine</title>
+    
     <link href="/RecommendationSystem/css/bootstrap.css" rel="stylesheet">
     <link href="/RecommendationSystem/css/recommendation.css" rel="stylesheet">
     <link href="/RecommendationSystem/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@
 <body>
 
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top" >
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -48,8 +48,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="search">Search</a>
                     </li>
-                    <li><a href="customize">Customize</a>
-                    </li>
+                   
+                    <li><a href="<%=request.getContextPath()%>/pages/CustomizeHome.jsp"> Customize</a></li>
                     <li><a href="viewDelete">View/Delete</a>
                     </li>
                 </ul>

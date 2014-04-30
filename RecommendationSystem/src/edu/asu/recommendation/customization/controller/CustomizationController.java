@@ -1,4 +1,4 @@
-/*package edu.asu.recommendation.customization.controller;
+package edu.asu.recommendation.customization.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +20,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 		@Autowired
 		private ServiceComponentImpl serviceComponentImpl;			
 
-		
+		// Service Customization
 		@RequestMapping(value="/Customization/EditService", method=RequestMethod.POST)
 	    public ModelAndView userLogin(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpSession sessionID)
 	    {
@@ -50,4 +50,3 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 	 
 	 
 	
-*/
