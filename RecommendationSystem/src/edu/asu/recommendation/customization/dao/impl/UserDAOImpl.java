@@ -10,7 +10,8 @@ import edu.asu.recommendation.customization.dao.UserDAO;
 import edu.asu.recommendation.customization.dto.UserDTO;
 
 @Repository
-public class UserDAOImpl implements UserDAO 	{
+public class UserDAOImpl implements UserDAO 	
+{
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -26,6 +27,16 @@ public class UserDAOImpl implements UserDAO 	{
 		return password;
 	}
 
+	public Integer retrieveUserID(String userName)	
+	{
+		Session session = sessionFactory.openSession();
+		String queryString = "FROM UserDTO u WHERE u.userName = :userName";
+		Query query = session.createQuery(queryString);
+		query.setParameter("userName", userName);
+		Integer user_id = ((UserDTO) query.uniqueResult()).getUserId();
+		//System.out.println("Password = " + password);
+		return user_id;
+	}
 }
 
 

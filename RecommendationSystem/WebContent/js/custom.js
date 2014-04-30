@@ -7,6 +7,7 @@ function toReco(){
 	$(".rec-added-title-container").removeClass("hidden");
 	$(".back-but-container").removeClass("hidden");
 	$(".next-but-container").addClass("hidden");
+	getRecos();
 }
 
 function toAdd(){
@@ -19,6 +20,24 @@ function toAdd(){
 	$(".back-but-container").addClass("hidden");
 	$(".next-but-container").removeClass("hidden");
 }
+
+function getRecos() {
+	$.ajax({
+	url:"/RecommendationSystem/GetRecommendations",
+	data: {
+				attribute: global_temps.join(",")
+			},
+	success:function(response)
+	{
+		for(var i=0; i<response.templateName.length;i++) {
+			$(".recommended-templates").append("<div class='reco-temp'>"+response.templateName[i]+"</div>");
+		}
+
+
+	}
+	});
+}
+
 var suggestions=[];
 $.ajax({
 	url:"/RecommendationSystem/GetAutocompleteSuggestions",
@@ -37,13 +56,11 @@ $.ajax({
 	}
 });
 
-
-var temps = [{tempid:"12"},{tempid:"332"},{tempid:"44"}];
-var dummy= ["aaaaa","afafas","ffwgwe"];
 var global_temps=[];
 
 $(document).ready(function(){
 	
+
 
 	$("#add_button").on("click",function(){
 
@@ -55,26 +72,23 @@ $(document).ready(function(){
 		}
 	});
 
+
+
+
 	$("#next_button").on("click", function(){
-		$.ajax({
-			url:"/RecommendationSystem/GetRecommendations",
-			data: {
-				attribute: JSON.stringify(temps)
-				//attribute: "Hello"
-			},
-			success:function(response)
-			{
-				//dosomething
-				console.log("yay");
-			}
-		});
 		//Change view
 		toReco();
 	});
 
+
+
+
 	$("#back_button").on("click", function(){
 		toAdd();
 	});
+
+
+
 
 	$(".added-templates").on("click", ".added-temp", function(){
 		$(this).toggleClass("added-temp-select");
@@ -89,4 +103,12 @@ $(document).ready(function(){
 	});
 
 
+
+	$(".recommended-templates").on("click", ".rec-temp", function(){
+		//code for moving
+	})
+
+
+
 });
+

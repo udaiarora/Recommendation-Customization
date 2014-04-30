@@ -14,7 +14,8 @@ import edu.asu.recommendation.customization.service.*;
 import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 
 	@Controller
-	public class LoginController {
+	public class LoginController 
+	{
 		
 		@Autowired
 		private UserServiceImpl userServiceImpl;			
