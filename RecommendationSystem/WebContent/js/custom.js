@@ -7,6 +7,7 @@ function toReco(){
 	$(".rec-added-title-container").removeClass("hidden");
 	$(".back-but-container").removeClass("hidden");
 	$(".next-but-container").addClass("hidden");
+	getRecos();
 }
 
 function toAdd(){
@@ -21,18 +22,21 @@ function toAdd(){
 }
 
 function getRecos() {
-	.ajax({
+	$.ajax({
 	url:"/RecommendationSystem/GetRecommendations",
+	data: {
+				attribute: global_temps.join(",")
+			},
 	success:function(response)
 	{
-		for(var i=0; i<response.templateName.length;i++) {
-			$(".recommended-templates").append("<div class='reco-temp'>"+response.templateName[i]+"</div>");
+		for(var i=0; i<response.length;i++) {
+			$(".recommended-templates").append("<div class='reco-temp'>"+response[i]+"</div>");
 		}
 
 
 	}
+	});
 }
-
 
 var suggestions=[];
 $.ajax({
@@ -52,9 +56,6 @@ $.ajax({
 	}
 });
 
-
-var temps = [{tempid:"12"},{tempid:"332"},{tempid:"44"}];
-var dummy= ["aaaaa","afafas","ffwgwe"];
 var global_temps=[];
 
 $(document).ready(function(){
@@ -75,18 +76,6 @@ $(document).ready(function(){
 
 
 	$("#next_button").on("click", function(){
-		$.ajax({
-			url:"/RecommendationSystem/TemplateSearchScreen",
-			data: {
-				attribute: JSON.stringify(temps)
-				//attribute: "Hello"
-			},
-			success:function(response)
-			{
-				//dosomething
-				console.log("yay");
-			}
-		});
 		//Change view
 		toReco();
 	});
@@ -115,7 +104,7 @@ $(document).ready(function(){
 
 
 
-	$(".recommended-templates").on("click", ".rec-temp" function(){
+	$(".recommended-templates").on("click", ".rec-temp", function(){
 		//code for moving
 	})
 
@@ -123,31 +112,3 @@ $(document).ready(function(){
 
 });
 
-
-/*
-$(function() {
-	
-	$( "#query" ).autocomplete({
-		source:  function(req, add){
-			
-                //pass request to server
-                $.getJSON("/IR_RestfulAPI/rest/home/querycomp?partialquery="+$("#query").val(), req, function(data) {
-                	
-                    //create array for response objects
-                    var suggestions = [];
-                    
-                    //process response
-                    for(i=0; i<5;i++){                             
-                    	suggestions.push(data[i].value);
-                    }
-                    
-         	       //pass array to callback
-         	       add(suggestions);
-         	   });
-                
-            }
-        });
-});
-
-
-*/

@@ -8,5 +8,5 @@ public interface RecommendationService
 {
 
 	//public boolean getTemplates(Integer[] templates) throws Exception;
-	public List<RecommendedItem> getTemplates() throws Exception;
+	public List<RecommendedItem> recommendTemplates() throws Exception;
 }

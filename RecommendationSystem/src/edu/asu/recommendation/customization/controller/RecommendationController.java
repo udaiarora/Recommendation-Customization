@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.asu.recommendation.customization.service.impl.AutoCompleteSuggestionsImpl;
 import edu.asu.recommendation.customization.service.impl.RecommendationImpl;
 import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 
@@ -26,35 +27,28 @@ public class RecommendationController
 {
 	@Autowired
 	private RecommendationImpl recommendationImplOBj;
+	@Autowired
+	private AutoCompleteSuggestionsImpl AutoCompleteImplOBj;
 	
 	
 	@RequestMapping(value="/GetAutocompleteSuggestions", method=RequestMethod.GET)
 	public @ResponseBody Template getAutoCompleteSuggestions() throws Exception
 	{
-		//boolean isAddSuccess = recommendationImplOBj.getTemplates();
-		//call autocomplete function here
-		//String[] return_array=getTemplateNames();
-		//return new Template(return_array);
-		boolean isAddSuccess=true;
-		if(isAddSuccess == true)
-		{
-			System.out.println("The Service function returned True");
-			return new Template(new String[]{"Template1", "Template2"});
-		}
-		return new Template(new String[]{"FailTemplate1", "FailTemplate2"});
+		String[] ResultArray=AutoCompleteImplOBj.getAutoCompleteSuggestions();
+		return new Template(ResultArray);
 		
 	}
 	
-	@RequestMapping(value="/TemplateSearchScreen", method=RequestMethod.GET)
-    public  @ResponseBody Template addTemplates(@RequestParam("attribute") String[] templateID,HttpSession sessionID) throws Exception
+	@RequestMapping(value="/GetRecommendations", method=RequestMethod.GET)
+    public  @ResponseBody Template addTemplates(@RequestParam("attribute") String[] usersChoices,HttpSession sessionID) throws Exception
     {
-			List<RecommendedItem> list = recommendationImplOBj.getTemplates();
+			List<RecommendedItem> list = recommendationImplOBj.recommendTemplates();
 			boolean isAddSuccess=true;
 			if(isAddSuccess == true)
 			{
 				//sessionID.setAttribute("userName", userName);
 				System.out.println("The Service function returned True");
-				System.out.println("The template ID is "+ templateID[0]);
+				System.out.println("The template ID is "+ usersChoices[0]);
 				//return new ModelAndView("/TemplateSearchScreen");
 				//return "success";
 				return new Template(new String[]{"SuccessTemplate"});
@@ -63,29 +57,5 @@ public class RecommendationController
 		//return new ModelAndView("/index").addObject("AdditionError", "Retry!");
 			return new Template(new String[]{"SuccessTemplate"});
 	}
-	
-	/*public String[] getTemplateNames() throws Exception
-	{
-	@SuppressWarnings("resource")
-	BufferedReader reader = new BufferedReader(new FileReader("G:\\Spring 2014\\Software Design\\Recommendation-Customization\\RecommendationSystem\\WebContent\\Template.csv"));
-	String line = null;
-	String splitcsvby = ",";
-	String [] templateNames= {};
-	while((line = reader.readLine()) != null)
-	{
-		templateNames = line.split(splitcsvby);
-	}
-	System.out.println(templateNames[1]);
-	
-	List<RecommendedItem> list = recommendationImplOBj.getTemplates();
-	String[] tempnames = {};
-	HashMap<String, String> hm = new HashMap<String, String>();
-	hm.put(templateNames[0], templateNames[1]);
-	for(int i=0; i<list.size(); i++)
-	{
-		 tempnames[i]= hm.get(list.get(i));
-	}
-	return templateNames;
-	}*/
 	
 }
