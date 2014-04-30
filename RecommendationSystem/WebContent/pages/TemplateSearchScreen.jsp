@@ -101,9 +101,6 @@
             <div class="col-lg-4">
                 <button id="delete_button" type="button" class="btn btn-delete">Delete</button>
             </div>
-            <div class="col-lg-1 hidden rec-add-container">
-                <button id="cust_add_button" type="button" class="btn btn-delete">Add</button>
-            </div>
         </div>
 
 

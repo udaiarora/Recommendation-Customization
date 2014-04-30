@@ -19,6 +19,21 @@ function toAdd(){
 	$(".back-but-container").addClass("hidden");
 	$(".next-but-container").removeClass("hidden");
 }
+
+function getRecos() {
+	.ajax({
+	url:"/RecommendationSystem/GetRecommendations",
+	success:function(response)
+	{
+		for(var i=0; i<response.templateName.length;i++) {
+			$(".recommended-templates").append("<div class='reco-temp'>"+response.templateName[i]+"</div>");
+		}
+
+
+	}
+}
+
+
 var suggestions=[];
 $.ajax({
 	url:"/RecommendationSystem/GetAutocompleteSuggestions",
@@ -45,6 +60,7 @@ var global_temps=[];
 $(document).ready(function(){
 	
 
+
 	$("#add_button").on("click",function(){
 
 		var toadd=$("#autocomplete").val();
@@ -54,6 +70,9 @@ $(document).ready(function(){
 			global_temps.push(toadd);
 		}
 	});
+
+
+
 
 	$("#next_button").on("click", function(){
 		$.ajax({
@@ -72,9 +91,15 @@ $(document).ready(function(){
 		toReco();
 	});
 
+
+
+
 	$("#back_button").on("click", function(){
 		toAdd();
 	});
+
+
+
 
 	$(".added-templates").on("click", ".added-temp", function(){
 		$(this).toggleClass("added-temp-select");
@@ -87,6 +112,13 @@ $(document).ready(function(){
 		
 		$(".added-temp-select").remove();
 	});
+
+
+
+	$(".recommended-templates").on("click", ".rec-temp" function(){
+		//code for moving
+	})
+
 
 
 });

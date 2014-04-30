@@ -22,15 +22,19 @@
 	display: none;
 }
 
-.added-temp {
+.added-temp, .reco-temp {
 	padding: 10px;
 }
 
-.added-temp:hover {
+.added-temp:hover, .reco-temp:hover {
 	cursor: pointer;
 	background: #f2f2f2;
 }
 
 .added-temp-select {
+	background: #ddddff;
+}
+
+.added-temp-select:hover {
 	background: #ddddff;
 }
