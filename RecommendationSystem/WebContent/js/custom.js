@@ -57,7 +57,7 @@ $(document).ready(function(){
 
 	$("#next_button").on("click", function(){
 		$.ajax({
-			url:"/RecommendationSystem/TemplateSearchScreen",
+			url:"/RecommendationSystem/GetRecommendations",
 			data: {
 				attribute: JSON.stringify(temps)
 				//attribute: "Hello"
@@ -90,32 +90,3 @@ $(document).ready(function(){
 
 
 });
-
-
-/*
-$(function() {
-	
-	$( "#query" ).autocomplete({
-		source:  function(req, add){
-			
-                //pass request to server
-                $.getJSON("/IR_RestfulAPI/rest/home/querycomp?partialquery="+$("#query").val(), req, function(data) {
-                	
-                    //create array for response objects
-                    var suggestions = [];
-                    
-                    //process response
-                    for(i=0; i<5;i++){                             
-                    	suggestions.push(data[i].value);
-                    }
-                    
-         	       //pass array to callback
-         	       add(suggestions);
-         	   });
-                
-            }
-        });
-});
-
-
-*/
