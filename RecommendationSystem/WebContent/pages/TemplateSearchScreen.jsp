@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Add Templates</title>
 
     <link href="/RecommendationSystem/css/bootstrap.css" rel="stylesheet">
     <link href="/RecommendationSystem/css/recommendation.css" rel="stylesheet">

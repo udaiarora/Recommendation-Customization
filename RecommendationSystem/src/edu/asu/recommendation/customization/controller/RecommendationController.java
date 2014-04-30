@@ -48,10 +48,10 @@ public class RecommendationController
 			{
 				//sessionID.setAttribute("userName", userName);
 				System.out.println("The Service function returned True");
-				System.out.println("The template ID is "+ usersChoices[0]);
+				//System.out.println("The template ID is "+ usersChoices[0]);
 				//return new ModelAndView("/TemplateSearchScreen");
 				//return "success";
-				return new Template(new String[]{"SuccessTemplate"});
+				return new Template(new String[]{"SuccessTemplate","failed","hahaha","lol"});
 			}
 			//return "error";
 		//return new ModelAndView("/index").addObject("AdditionError", "Retry!");

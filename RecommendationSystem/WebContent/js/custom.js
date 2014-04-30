@@ -1,4 +1,4 @@
-function toReco(){
+function toRecoScreen(){
 	$(".search-bar").slideUp(100);
 	$("h1").html("Recommendations");
 	$(".recommended-templates-container").removeClass("hidden");
@@ -10,7 +10,7 @@ function toReco(){
 	getRecos();
 }
 
-function toAdd(){
+function toAddScreen(){
 	$(".search-bar").slideDown(100);
 	$("h1").html("Search Templates");
 	$(".recommended-templates-container").addClass("hidden");
@@ -29,8 +29,9 @@ function getRecos() {
 			},
 	success:function(response)
 	{
-		for(var i=0; i<response.length;i++) {
-			$(".recommended-templates").append("<div class='reco-temp'>"+response[i]+"</div>");
+		$(".recommended-templates").html(" ");
+		for(var i=0; i<response.templateName.length;i++) {
+			$(".recommended-templates").append("<div class='reco-temp'>"+response.templateName[i]+"</div>");
 		}
 
 
@@ -64,7 +65,7 @@ $(document).ready(function(){
 
 	$("#add_button").on("click",function(){
 
-		var toadd=$("#autocomplete").val();
+		toadd=$("#autocomplete").val();
 		if(($.inArray(toadd, suggestions)+1) && !($.inArray(toadd, global_temps)+1))
 		{
 			$(".added-templates").append("<div class='added-temp'>"+toadd+"</div>");
@@ -77,14 +78,14 @@ $(document).ready(function(){
 
 	$("#next_button").on("click", function(){
 		//Change view
-		toReco();
+		toRecoScreen();
 	});
 
 
 
 
 	$("#back_button").on("click", function(){
-		toAdd();
+		toAddScreen();
 	});
 
 
@@ -104,8 +105,14 @@ $(document).ready(function(){
 
 
 
-	$(".recommended-templates").on("click", ".rec-temp", function(){
-		//code for moving
+	$(".recommended-templates").on("click", ".reco-temp", function(){
+		toadd=$(this).text();
+		if(($.inArray(toadd, suggestions)+1) && !($.inArray(toadd, global_temps)+1))
+		{
+			$(".added-templates").append("<div class='added-temp'>"+toadd+"</div>")
+			global_temps.push(toadd);
+		}
+		getRecos();
 	})
 
 
