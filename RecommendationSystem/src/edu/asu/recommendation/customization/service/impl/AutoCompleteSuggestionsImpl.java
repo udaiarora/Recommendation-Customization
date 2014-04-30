@@ -20,6 +20,7 @@ public class AutoCompleteSuggestionsImpl implements AutoCompleteSuggestions
 	public String[] getAutoCompleteSuggestions(HashMap<String,String> IDtoName) throws Exception 
 	{
 		BufferedReader reader = new BufferedReader(new FileReader("G:\\Spring 2014\\Software Design\\Recommendation-Customization\\RecommendationSystem\\WebContent\\Template.csv"));
+
 		
 		String[] tempnames=new String[IDtoName.size()];
 		

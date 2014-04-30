@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.css" />  
+<style>
+ body {
+        margin-top: 60px;
+  }
+</style>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<style type="text/css" scoped>
+	td { text-align:left; font-family: verdana,arial; color: #000000; font-size: 1.00em; }
+	input { border: 1px solid #CCCCCC; border-radius: 5px; color: #666666; display: inline-block; font-size: 1.00em;  padding: 5px; width: 100%; }
+	input[type="reset"], input[type="submit"] { height: auto; width: auto; cursor: pointer; box-shadow: 0px 0px 5px #D4D4D4; float: right; margin-top: 10px; }
+	table.center { margin-left:auto; margin-right:auto; }
+	.error { font-family: verdana,arial; color: #000000; font-size: 1.00em; }
+	</style>
+	<script type="text/javascript">
+	function setTitle()
+	{
+		document.getElementById("label").innerText = "Enter the Title to be displayed";
+		document.getElementById("input").innerHTML = "<input id='title_msg' type='text'>";
+		document.getElementById("reset_button").innerHTML = "<input type='button' style='width:100px' value='Reset' onClick='reset();'>&nbsp;&nbsp;";
+		document.getElementById("set_title").innerHTML = "";
+		document.getElementById("font").innerHTML = "";
+		document.getElementById("customize").innerHTML = "<input type='button' style='width:150px' value='Apply Changes' onClick='customize(1);'>&nbsp;&nbsp;";
+		document.getElementById("back").innerHTML = "<input type='button' style='width:100px' value='<<Back' onClick='back();'>&nbsp;&nbsp;";
+	}
+	
+	function back()
+	{
+		document.getElementById("customize").innerHTML  = "";
+		document.getElementById("reset_button").innerHTML = "";
+		document.getElementById("set_title").innerHTML = "<input type='button' style='width:100px' value='Set Title' onClick='setTitle();'>&nbsp;";
+		document.getElementById("font").innerHTML = "<input id='change_font' type='button' style='width:100px' value='Change Font' onclick='changeFont()'>&nbsp;";
+		document.getElementById("back").innerHTML = "";
+		document.getElementById("label").innerText = "";
+		document.getElementById("input").innerHTML = "";
+	}
+	function changeFont()
+	{
+		document.getElementById("label").innerText = "Choose the font family";
+		document.getElementById("input").innerHTML = "<select id='fontSelector'> <option value='Arial'>Arial</option> <option value='Times New Roman'>Times New Roman</option> <option value='Georgia'>Georgia</option> <option value='Calibri'>Calibri</option></select>";
+		document.getElementById("customize").innerHTML = "<input type='button' style='width:150px' value='Apply Changes' onClick='customize(2);'>&nbsp;&nbsp;";
+		document.getElementById("back").innerHTML = "<input type='button' style='width:100px' value='<<Back' onClick='back();'>&nbsp;&nbsp;";
+		document.getElementById("reset_button").innerHTML = "<input type='button' style='width:100px' value='Reset' onClick='reset();'>&nbsp;&nbsp;";
+		document.getElementById("set_title").innerHTML = "";
+		document.getElementById("font").innerHTML = "";
+		
+	}
+	
+	function customize(a)
+	{
+		if(a == 1)
+			if(document.getElementById("title_msg").value == "")
+				document.getElementById("title").innerText = "<Title>";
+			else
+				document.getElementById("title").innerText = document.getElementById("title_msg").value;
+		if(a == 2)
+			$("td").css({'font-family':$('#fontSelector').val()});
+	}
+	
+	function reset()
+	{
+		document.getElementById("title").innerText = "<Title>";
+		document.getElementById("title_msg").value = "";
+		
+	}
+	
+	function edit_username()
+	{
+		document.getElementById("username").innerHTML = "<input type='text' value='UserName'>";
+	}
+	</script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.php">Home</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#about">Search</a>
+                    </li>
+                    <li><a href="#services">View Templates</a>
+                    </li>
+                    <li><a href="#contact">Organization Info</a>
+                    </li>
+                    <li><a href="/RecommendationSystem">Log out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12">
+	<div style="text-align: center;">
+	<div style="box-sizing: border-box; display: inline-block; width: auto; max-width: 480px; background-color: #FFFFFF; border: 2px solid #D4D4D4; border-radius: 5px; box-shadow: 0px 0px 8px #D4D4D4; margin: 50px auto auto;">
+	<div style="background: #D4D4D4; border-radius: 5px 5px 0px 0px; padding: 15px;"><span id="title" style="font-family: verdana,arial; color: #666666; font-size: 1.00em; font-weight:bold;">&lt;Title&gt;</span></div>
+	<div style="background: ; padding: 15px">
+<form method="post" action="/login" name="aform" target="_top">
+<input type="hidden" name="action" value="login">
+<input type="hidden" name="hide" value="">
+<table class='center'>
+<tr><td id="username">UserName:</td><td><input type="text" name="login"></td></tr>
+<tr><td>Password:</td><td><input type="password" name="password"></td></tr>
+<tr><td>&nbsp;</td><td><input type="submit" value="Submit"></td></tr>
+<tr><td colspan=2>&nbsp;</td></tr>
+<tr><td colspan=2></td></tr>
+<tr><td colspan=2></td></tr>
+</table>
+</form>
+</div></div></div>
+<table class="center">
+<tr>
+<td><br /></td>
+</tr>
+<tr>
+<td></td>
+<td id="label"><td>&nbsp;&nbsp;
+<td id="input"></td>
+</tr>
+<tr>
+<td><br /></td>
+</tr>
+<tr>
+<td><br /></td>
+</tr>
+<tr>
+<td><br /></td>
+</tr>
+<tr>
+<td><br /></td>
+</tr>
+<tr>
+</table>
+<table align="center">
+<tr>
+<td id="set_title">
+	<input type="button" style="width:100px" value="Set Title" onClick="setTitle();">&nbsp;
+</td>
+<td id="font">
+	<input id="change_font" type="button" style="width:100px" value="Change Font" onClick="changeFont();">&nbsp;
+</td>
+</tr>
+<tr>
+<td>
+<br/>
+</td>
+</tr>
+<tr>
+<td id="back">
+</td>
+<td id="customize">
+</td>
+<td id="reset_button">
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<script src="../../js/jquery-1.10.2.js"></script>
+<script src="../../js/bootstrap.js"></script>
+</body>
+</html>
