@@ -28,7 +28,8 @@ import edu.asu.recommendation.customization.service.*;
 		
 		@Autowired
 		private TemplateService templateService;
-
+		
+		
 		
 		@RequestMapping(value="/Welcome", method=RequestMethod.POST)
 	    public ModelAndView userLogin(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpSession sessionID)
@@ -36,10 +37,12 @@ import edu.asu.recommendation.customization.service.*;
 			boolean isFormValidationSucccess = validateLoginFields(userName, passWord);	
 			if(isFormValidationSucccess == true)
 			{
-				boolean isLoginSuccess = userServiceImpl.validateUser(userName, passWord);
+				boolean isLoginSuccess = userService.validateUser(userName, passWord);
 				if(isLoginSuccess == true)
 				{
 					sessionID.setAttribute("userName", userName);
+					UserDTO uDTO = userService.getUserDTO(userName);
+					sessionID.setAttribute("userId", uDTO.getUserId());
 					return new ModelAndView("/TemplateSearchScreen");
 				}
 			}

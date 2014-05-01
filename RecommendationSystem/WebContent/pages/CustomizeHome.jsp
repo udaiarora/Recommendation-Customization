@@ -73,10 +73,10 @@
   <!-- List group -->
   <ul class="list-group">
 
-    <li class="list-group-item"><a href="<%=request.getContextPath()%>/pages/ServiceComponentCustomizationHome.jsp">Customize Templates</a></li>
-    <li class="list-group-item"><a href="<%=request.getContextPath()%>/pages/ServiceComponentCustomizationHome.jsp">Customize Services</a></li>
-    <li class="list-group-item"><a href="<%=request.getContextPath()%>/pages/ServiceComponentCustomizationHome.jsp">Customize Workflow</a></li>
-    <li class="list-group-item"><a href="<%=request.getContextPath()%>/pages/ServiceComponentCustomizationHome.jsp">Customize DataModel</a></li>
+    <li class="list-group-item"><a href="<%=request.getContextPath()%>/pages/templates/service/ServiceComponentCustomizationHome.jsp">Customize Templates</a></li>
+    <li class="list-group-item"><a href="<%=request.getContextPath()%>/pages/templates/service/ServiceComponentCustomizationHome.jsp">Customize Services</a></li>
+    <li class="list-group-item"><a href="<%=request.getContextPath()%>/pages/templates/service/ServiceComponentCustomizationHome.jsp">Customize Workflow</a></li>
+    <li class="list-group-item"><a href="<%=request.getContextPath()%>/pages/templates/service/ServiceComponentCustomizationHome.jsp">Customize DataModel</a></li>
   
   </ul>   
   </div>

@@ -1,17 +1,15 @@
 package edu.asu.recommendation.customization.dao;
 
+import edu.asu.recommendation.customization.dto.ServicesComponentDTO;
+
 public interface ServiceComponentDAO {
 	
-	// List of Services associated with the user ID.
-	public String retrieveServiceList(String userID); 
 	
-	// Persist the ChangedService in the DB
-	public String updateChangedParamService(String serviceID,String changedParam1ID,String changedParam2ID);
+		// Return a DTO Object
+		public ServicesComponentDTO getServiceComponet (Integer userId, Integer templateId);
+		
+		public Boolean updateServiceAttributes(ServicesComponentDTO serviceDTO); // update a whole row using DTO.
 
-	// Change the Name of the service
-	public String updateChangedNameService(String serviceID,String oldComponent1ID,String changedComponentID);
 	
-	// Change the return type of the service
-	public String updateChangedReturnTypeService(String serviceID,String oldComponentID,String changedComponentID);
 		
 }

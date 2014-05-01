@@ -2,42 +2,30 @@ package edu.asu.recommendation.customization.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import edu.asu.recommendation.customization.dao.*;
 import edu.asu.recommendation.customization.dao.impl.ServiceComponentDAOImpl;
-import edu.asu.recommendation.customization.dao.impl.UserDAOImpl;
-import edu.asu.recommendation.customization.service.CustomizationService;
+import edu.asu.recommendation.customization.dto.ServicesComponentDTO;
+import edu.asu.recommendation.customization.service.ServiceComponentService;
 
 @Service
-public class ServiceComponentImpl implements CustomizationService{
+public class ServiceComponentImpl implements ServiceComponentService{
 
 	@Autowired
-	private ServiceComponentDAOImpl ServiceComponentDAOImplObject;
+	private ServiceComponentDAOImpl serviceDAOImpl;
 	
-	public boolean editServiceParam(String inputParam1, String inputParam2)
-	{
-		
-		/*//String userPassword = ServiceComponentDAOImplObject.retrievePassword(inputUserName);
-		//System.out.println("User Input Password = " + inputPassword);
-		if(!userPassword.isEmpty())
-		{
-			if(userPassword.equals(inputPassword))
-			{
-				return true;
-			}
-		}*/
-		return false;
+	@Transactional
+	public ServicesComponentDTO getServiceAttributes(Integer userId,
+			Integer templateId) {
+			
+		ServicesComponentDTO serviceDTO  = serviceDAOImpl.getServiceComponet(userId, templateId);
+		return serviceDTO;
 	}
 
-	@Override
-	public boolean editServiceTemplates (Integer[] templates) {
+	@Transactional
+	public Boolean updateServiceAttributes(ServicesComponentDTO serviceDTO) {
 		// TODO Auto-generated method stub
-		return false;
+		return serviceDAOImpl.updateServiceAttributes(serviceDTO);
 	}
 	
-	public boolean editParameters(String userName, String passWord) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
