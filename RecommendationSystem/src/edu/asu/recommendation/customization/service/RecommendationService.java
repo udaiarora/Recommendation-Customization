@@ -7,5 +7,5 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 
 public interface RecommendationService 
 {
-	public List<RecommendedItem> recommendTemplates(ArrayList<Integer> TemplateIDs) throws Exception;
+	public List<RecommendedItem> recommendTemplates(Integer userid,ArrayList<Integer> TemplateIDs) throws Exception;
 }

@@ -80,16 +80,16 @@ public class RecommendationController
 			//get the corresponding userID and pass it on to the updateCSVfilefunction
 			Integer user_id=userDAOImplobject.retrieveUserID(username);
 			System.out.println("The user id is"+ user_id);
-		    //String userid="100";
-			
+		    String userid="100";
+		    user_id=100;
 			updateCSVfile(String.valueOf(user_id),usersChoices);
 			ArrayList<Integer> tempIDs=getTemplateIDS(usersChoices);
 			for(String s: usersChoices)
 			{
-				System.out.println(s);
+				System.out.println("The user selected"+ s);
 			}
 			
-			List<RecommendedItem> list = recommendationImplOBj.recommendTemplates(tempIDs);
+			List<RecommendedItem> list = recommendationImplOBj.recommendTemplates(user_id, tempIDs);
 			System.out.println("size of all_items is"+list.size());
 			//take template IDs from recommenderlist, lookup for template names on HashMAP and send it to the browser in the form of string array.
 			String[] recommendedItemNames=new String[list.size()];
