@@ -101,6 +101,7 @@ $(document).ready(function(){
 		}) ;
 		
 		$(".added-temp-select").remove();
+		getRecos();
 	});
 
 

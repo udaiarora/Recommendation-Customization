@@ -18,7 +18,8 @@ import edu.asu.recommendation.customization.service.*;
 
 
 	@Controller
-	public class LoginController {
+	public class LoginController 
+	{
 		
 		@Autowired
 		private UserService userService;

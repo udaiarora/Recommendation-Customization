@@ -58,7 +58,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 		public String customizeService(@ModelAttribute("serviceModel") ServiceComponentModel serviceModel, @RequestParam("templateId") String templateId, BindingResult result, HttpSession sessionID, ModelMap model)
 	    {
 			Integer userId = (Integer) sessionID.getAttribute("userId");
-			System.out.println("userID:" + userId + "templateID: " + templateId);
+			System.out.println("userID" + userId + "templateID: " + templateId);
 			ServicesComponentDTO servDTO = serviceComponentService.getServiceAttributes(userId, Integer.parseInt(templateId));
 			System.out.println("In Controller : getServiceInputdatatype1 " + servDTO.getServiceInputdatatype1() + " getServiceInputdatatype2 " + servDTO.getServiceInputdatatype1());
 			//serviceModel = copyServiceModelToDTO(serviceModel);

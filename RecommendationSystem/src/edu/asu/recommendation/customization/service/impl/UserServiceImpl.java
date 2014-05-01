@@ -9,7 +9,8 @@ import edu.asu.recommendation.customization.dao.impl.UserDAOImpl;
 import edu.asu.recommendation.customization.dto.UserDTO;
 import edu.asu.recommendation.customization.service.UserService;
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService
+{
 
 	@Autowired
 	private UserDAOImpl userDAOImplobject;
