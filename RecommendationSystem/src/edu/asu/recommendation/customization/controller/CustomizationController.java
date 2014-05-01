@@ -1,5 +1,7 @@
 package edu.asu.recommendation.customization.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.asu.recommendation.customization.dto.GuiComponentDTO;
+import edu.asu.recommendation.customization.dto.TemplatesDTO;
 import edu.asu.recommendation.customization.dto.UserDTO;
 import edu.asu.recommendation.customization.model.GUIComponentModel;
 import edu.asu.recommendation.customization.service.*;
@@ -39,31 +42,64 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			//String userName = (String) sessionID.getAttribute("userName");
 			System.out.println(userId + " " + templateId + " " + guiId);
 			//TemplatesDTO tDTO = templateService.getTemplateDTO(uDTO.getUserId(), templateId);
-			GuiComponentDTO gDTO = guiService.getGUIComponent(userId, Integer.parseInt(templateId), Integer.parseInt(guiId));
+			GuiComponentDTO gDTO = guiService.getGUIComponent(userId, Integer.parseInt(templateId));
 			
 			//System.out.println("GuiAttribute1 " + guiModel.getGuiAttribute1() + " GuiAttrValue1 " + guiModel.getGuiAttrValue1());
 			guiModel = copyDtoToModel(gDTO, guiModel);
 			guiModel.setUserId(userId);
 			guiModel.setTemplateId(Integer.parseInt(templateId));
 			model.addAttribute("guiModel", guiModel);
-			return gDTO.getUrl();
+			//return gDTO.getUrl();
+			return "/templates/gui/BookSearch";
 	    }
 	
 		@RequestMapping(value="/updateGUI", method=RequestMethod.POST)
-		public String updateGUI(@ModelAttribute("guiModel") GUIComponentModel guiModel, BindingResult result, ModelMap model)
+		public String updateGUI(@ModelAttribute("guiModel") GUIComponentModel guiModel, BindingResult result, HttpSession sessionID, ModelMap model)
 		{
 			//System.out.println(guiModel.getUserId());
 			System.out.println(guiModel.getGuiAttrValue1());
 			System.out.println(guiModel.getUserId() + " " + guiModel.getTemplateId() + " " + guiModel.getGuiId());
-			GuiComponentDTO guiDTO = guiService.getGUIComponent(guiModel.getUserId(), guiModel.getTemplateId(), guiModel.getGuiId());
+			GuiComponentDTO guiDTO = guiService.getGUIComponent(guiModel.getUserId(), guiModel.getTemplateId());
 			guiDTO.setGuiAttrValue1(guiModel.getGuiAttrValue1());
 			guiDTO.setGuiAttrValue2(guiModel.getGuiAttrValue2());
-			boolean status = guiService.updateGUIAttributes(guiDTO);
-			if(status == true)
+			if(guiDTO.getUserID().getUserId() == -1)
 			{
-				System.out.println("True");
+				GuiComponentDTO gDTO = new GuiComponentDTO();
+				UserDTO uDTO = userService.getUserDTO((String)sessionID.getAttribute("userName"));
+				gDTO.setUserID(uDTO);
+				gDTO.setGuiAttribute1(guiDTO.getGuiAttribute1());
+				gDTO.setGuiAttribute2(guiDTO.getGuiAttribute2());
+				gDTO.setGuiAttribute3(guiDTO.getGuiAttribute3());
+				gDTO.setGuiAttrValue1(guiDTO.getGuiAttrValue1());
+				gDTO.setGuiAttrValue2(guiDTO.getGuiAttrValue2());
+				gDTO.setGuiAttrValue3(guiDTO.getGuiAttrValue3());
+				gDTO.setGuiName(guiDTO.getGuiName());
+				gDTO.setTemplateID(guiDTO.getTemplateID());
+				gDTO.setUrl(guiDTO.getUrl());
+				boolean status = guiService.saveGUIAttributes(gDTO);
+			}
+			else
+			{
+			
+				boolean status = guiService.updateGUIAttributes(guiDTO);
+				if(status == true)
+				{
+					System.out.println("True");
+				}
 			}
 			return guiDTO.getUrl();
+		}
+		
+		@RequestMapping(value="/showTemplates", method=RequestMethod.POST)
+		public String showTemplates(ModelMap model, HttpSession sessionID)
+		{
+			Integer userId = (Integer) sessionID.getAttribute("userId");
+			List<TemplatesDTO> templatesList = templateService.getTemplateList(userId);
+			for(TemplatesDTO t : templatesList)
+			{
+				System.out.println(t.getTemplateName());
+			}
+			return "/templates";
 		}
 		
 		public GUIComponentModel copyDtoToModel(GuiComponentDTO gDTO, GUIComponentModel guiModel)
