@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.asu.recommendation.customization.dao.ServiceComponentDAO;
+import edu.asu.recommendation.customization.dto.GuiComponentDTO;
 import edu.asu.recommendation.customization.dto.ServicesComponentDTO;
 
 
@@ -25,8 +26,12 @@ public  class ServiceComponentDAOImpl implements ServiceComponentDAO 	{
 		query.setParameter("templateId", templateId);
 		System.out.println("ServiceDAO UserID" + userId + "ServiceDAO TemplateID " + templateId);
 		ServicesComponentDTO servDTO = (ServicesComponentDTO) query.uniqueResult();
-		if(servDTO == null)
-			System.out.println("Null");
+		if(servDTO == null){
+			System.out.println("\nNull Pointer in DAO impl");
+			query.setParameter("userId", -1);
+				
+			servDTO = (ServicesComponentDTO) query.uniqueResult();
+		}
 		System.out.println("ServiceInputDataType1 = " + servDTO.getServiceInputdatatype1());
 		System.out.println("ServiceInputDataType2 = " + servDTO.getServiceInputdatatype2());
 		System.out.println("ServiceOutputDataType = " + servDTO.getServiceOutputdatatype());

@@ -2,7 +2,7 @@ package edu.asu.recommendation.customization.model;
 
 public class ServiceComponentModel {
 
-	private String service_name;
+	private String serviceName;
 	
 	private Integer userId;
 	
@@ -29,11 +29,11 @@ public class ServiceComponentModel {
 	}
 
 	public String getServiceName() {
-		return service_name;
+		return serviceName;
 	}
 
 	public void setServiceName(String service_name) {
-		this.service_name = service_name;
+		this.serviceName = service_name;
 	}
 
 	public Integer getUserId() {
@@ -79,7 +79,7 @@ public class ServiceComponentModel {
 
 	
 	public void setserviceDescription(String serviceDescription) {
-		this.serviceOutputdatatype = serviceDescription;
+		this.serviceDescription = serviceDescription;
 	}
 
 	public String getserviceDescription() {
