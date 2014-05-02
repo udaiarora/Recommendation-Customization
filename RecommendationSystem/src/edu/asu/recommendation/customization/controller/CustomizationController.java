@@ -67,7 +67,11 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			serviceModel.setTemplateId(Integer.parseInt(templateId));
 			model.addAttribute("serviceModel", serviceModel);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			return ;
+=======
+			return servDTO.getServiceName();
+>>>>>>> 5254f72174f47476fa9a918798e2a3e86fafc363
 =======
 			return servDTO.getServiceName();
 >>>>>>> 5254f72174f47476fa9a918798e2a3e86fafc363
