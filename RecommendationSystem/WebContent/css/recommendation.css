@@ -1,0 +1,41 @@
+.hidden {
+	display: none;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.added-templates, .recommended-templates {
+	border: 1px solid #bbbbbb;
+	border-radius: 2px;
+	margin-top: 20px;
+	height: 400px;
+	overflow-y: scroll;
+}
+
+.add-butt {
+	height: 32px;
+	width: 80px;
+}
+
+.ui-helper-hidden-accessible {
+	display: none;
+}
+
+.added-temp, .reco-temp {
+	padding: 10px;
+}
+
+.added-temp:hover, .reco-temp:hover {
+	cursor: pointer;
+	background: #f2f2f2;
+}
+
+.added-temp-select {
+	background: #ddddff;
+}
+
+.added-temp-select:hover {
+	background: #ddddff;
+}
