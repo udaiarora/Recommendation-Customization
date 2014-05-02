@@ -44,7 +44,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			//String userName = (String) sessionID.getAttribute("userName");
 			System.out.println(userId + " " + templateId + " " + guiId);
 			//TemplatesDTO tDTO = templateService.getTemplateDTO(uDTO.getUserId(), templateId);
-			GuiComponentDTO gDTO = guiService.getGUIComponent(userId, Integer.parseInt(templateId), Integer.parseInt(guiId));
+			GuiComponentDTO gDTO = guiService.getGUIComponent(userId, Integer.parseInt(templateId));
 			
 			//System.out.println("GuiAttribute1 " + guiModel.getGuiAttribute1() + " GuiAttrValue1 " + guiModel.getGuiAttrValue1());
 			guiModel = copyDtoToModel(gDTO, guiModel);
@@ -76,7 +76,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			//System.out.println(guiModel.getUserId());
 			System.out.println(guiModel.getGuiAttrValue1());
 			System.out.println(guiModel.getUserId() + " " + guiModel.getTemplateId() + " " + guiModel.getGuiId());
-			GuiComponentDTO guiDTO = guiService.getGUIComponent(guiModel.getUserId(), guiModel.getTemplateId(), guiModel.getGuiId());
+			GuiComponentDTO guiDTO = guiService.getGUIComponent(guiModel.getUserId(), guiModel.getTemplateId());
 			guiDTO.setGuiAttrValue1(guiModel.getGuiAttrValue1());
 			guiDTO.setGuiAttrValue2(guiModel.getGuiAttrValue2());
 			boolean status = guiService.updateGUIAttributes(guiDTO);
