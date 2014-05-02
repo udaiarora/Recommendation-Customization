@@ -65,9 +65,12 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			serviceModel = copyServDTOtoModel(servDTO, serviceModel);
 			serviceModel.setUserId(userId);
 			serviceModel.setTemplateId(Integer.parseInt(templateId));
-			System.out.println("Service Name" + serviceModel.getServiceName() + "ServiceOutputDatatype" + serviceModel.getserviceOutputdatatype());
 			model.addAttribute("serviceModel", serviceModel);
-			return "/templates/service/ServiceComponentCustomization";
+<<<<<<< HEAD
+			return ;
+=======
+			return servDTO.getServiceName();
+>>>>>>> 5254f72174f47476fa9a918798e2a3e86fafc363
 	    }
 
 	
@@ -93,7 +96,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 		public String updateService(@ModelAttribute("serviceModel") ServiceComponentModel serviceModel, BindingResult result, ModelMap model)
 		{
 			
-			System.out.println("Inside Update Controller" +serviceModel.getserviceInputdatatype1());
+			System.out.println(serviceModel.getserviceInputdatatype1());
 			System.out.println(serviceModel.getUserId() + " " + serviceModel.getTemplateId());
 			ServicesComponentDTO servDTO = serviceComponentService.getServiceAttributes(serviceModel.getUserId(), serviceModel.getTemplateId());
 			
@@ -108,7 +111,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			{
 				System.out.println("True");
 			}
-			return "/templates/service/ServiceComponentCustomization";
+			return servDTO.getServiceName();
 		}
 		
 		public GUIComponentModel copyDtoToModel(GuiComponentDTO gDTO, GUIComponentModel guiModel)
@@ -130,16 +133,12 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 		public ServiceComponentModel copyServDTOtoModel(ServicesComponentDTO servDTO, ServiceComponentModel servModel)
 		{
 			
-			System.out.println("comes in copyServDTOtoModel ");
 			servModel.setserviceInputdatatype1(servDTO.getServiceInputdatatype1());
 			servModel.setserviceInputdatatype2(servDTO.getServiceInputdatatype2());
 			servModel.setserviceInputdatatype3(servDTO.getServiceInputdatatype3());
 			servModel.setserviceOutputdatatype(servDTO.getServiceOutputdatatype());
 			servModel.setServiceName(servDTO.getServiceName());
-			servModel.setserviceDescription(servDTO.getServiceDescription());
-			String name = servDTO.getServiceName();
 			
-			System.out.println("servModel.setServiceName(servDTO.getServiceName());" + name);
 			return servModel;
 		}
 		
