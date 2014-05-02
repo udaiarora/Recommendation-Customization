@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.asu.recommendation.customization.dao.GUIComponentDAO;
 import edu.asu.recommendation.customization.dto.GuiComponentDTO;
 import edu.asu.recommendation.customization.dto.UserDTO;
-//import edu.asu.recommendation.customization.form.GUIFormBean;
 
 @Repository
 public class GUIComponentDAOImpl implements GUIComponentDAO{

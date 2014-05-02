@@ -15,9 +15,9 @@ public class GuiComponentServiceImpl implements GuiComponentService{
 	private GUIComponentDAOImpl guiDAO;
 	
 	@Transactional
-	public GuiComponentDTO getGUIComponent(Integer userId, Integer templateId)
+	public GuiComponentDTO getGUIComponent(Integer userId, Integer templateId, Integer guiId)
 	{
-		GuiComponentDTO guiDTO = guiDAO.getGUIAttributes(userId, templateId);
+		GuiComponentDTO guiDTO = guiDAO.getGUIAttributes(userId, templateId, guiId);
 		return guiDTO;
 	}
 	
