@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,6 +95,8 @@
 	}
 	</script>
 </head>
+
+
 <body onload="init();">
 <jsp:include page="/pages/menu.jsp"></jsp:include>
     

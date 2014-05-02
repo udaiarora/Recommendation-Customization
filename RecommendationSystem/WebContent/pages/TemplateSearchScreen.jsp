@@ -25,7 +25,12 @@
             margin-top: 60px;
         }
     </style>
-
+<script type="text/javascript">
+	function onsubmit()
+{
+	document.getElementById("customizeServiceform").submit();
+}
+</script>
 </head>
 
 <body>
@@ -73,7 +78,8 @@
                 <button id="add_button" type="button" class="btn btn-default add-butt">Add</button>
             </div>
         </div>
-
+		
+            
         <div class="row hidden rec-added-title-container">
             <div class="col-lg-6">Added</div>
             <div class="col-lg-6">Recommended</div>
@@ -95,6 +101,13 @@
             <div class="col-lg-1 hidden back-but-container">
                 <button id="back_button" type="button" class="btn btn-default">Back</button>
             </div>
+
+		  <form id ="customizeServiceform" name="customizeServiceform" target="_self" method="GET" action="CustomizeService" class="form-inline">
+		  <div class="col-lg-2">
+		  		<input type="submit" value="CustomizeServices" name="customize" class="btn btn-primary" />
+              	<input type='hidden' path="templateId" id='templateId' name='templateId' value='11' />
+           </div>
+           </form>
             <div class="col-lg-1 hidden customize_button_container">
                 <button id="customize_button" type="button" class="btn btn-default">Customize</button>
             </div>

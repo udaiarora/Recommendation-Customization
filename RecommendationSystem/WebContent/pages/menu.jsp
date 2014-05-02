@@ -31,7 +31,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="#about">Search</a>
                     </li>
-                    <li><a href="#services">View Templates</a>
+                    <li><a href="#">View Templates</a>
                     </li>
                     <li><a href="#contact">Organization Info</a>
                     </li>
