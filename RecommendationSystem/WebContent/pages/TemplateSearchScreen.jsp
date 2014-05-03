@@ -25,6 +25,12 @@
             margin-top: 60px;
         }
     </style>
+    <script type="text/javascript">
+	function submit()
+	{
+		document.getElementById("customizeform").submit();
+	}
+</script>
 
 </head>
 
@@ -43,17 +49,19 @@
                 <a class="navbar-brand" href="index.php">Template Recommendation and Customization Engine</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- Collect the nav links, forms, and other content for toggling -->	
+             <form id ="customizeform" name="customizeform" target="_self" method="POST" action="showTemplates" class="form-inline">
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="search">Search</a>
                     </li>
                    
                     <li><a href="<%=request.getContextPath()%>/pages/CustomizeHome.jsp"> Customize</a></li>
-                    <li><a href="viewDelete">View/Delete</a>
+                    <li><a href="javascript:submit();">View / Edit Templates </a>
                     </li>
                 </ul>
             </div>
+            </form>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -75,8 +83,8 @@
         </div>
 
         <div class="row hidden rec-added-title-container">
-            <div class="col-lg-6">Added</div>
-            <div class="col-lg-6">Recommended</div>
+            <div class="col-lg-6">Added Templates</div>
+            <div class="col-lg-6">Recommended Templates</div>
         </div>
 
         <div class="row">
@@ -96,7 +104,7 @@
                 <button id="back_button" type="button" class="btn btn-default">Back</button>
             </div>
             <div class="col-lg-1 hidden customize_button_container">
-                <button id="customize_button" type="button" class="btn btn-default">Customize</button>
+                <button id="customize_button" type="button" class="btn btn-default">Save</button>
             </div>
             <div class="col-lg-4">
                 <button id="delete_button" type="button" class="btn btn-delete">Delete</button>

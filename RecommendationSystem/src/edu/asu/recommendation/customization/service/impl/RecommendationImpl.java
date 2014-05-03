@@ -32,11 +32,11 @@ public class RecommendationImpl implements RecommendationService
 //public class RecommendationImpl
 {
 
-	public List<RecommendedItem> recommendTemplates(Integer user_id,ArrayList<Integer> TemplateIDs) throws Exception
+	public List<RecommendedItem> recommendTemplates(Integer user_id, String contextPath , ArrayList<Integer> TemplateIDs ) throws Exception
 	{
 			List<RecommendedItem> all_items=new ArrayList<RecommendedItem>();
 			System.out.println( "Starting the recommender system!" );
-			DataModel model = new FileDataModel(new File("G:\\Spring 2014\\Software Design\\Recommendation-Customization\\RecommendationSystem\\WebContent\\temporary.csv"));
+			DataModel model = new FileDataModel(new File(contextPath + "/temporary.csv"));
 			UserSimilarity user_similarity = new PearsonCorrelationSimilarity(model);
 			UserNeighborhood user_neighborhood = new ThresholdUserNeighborhood(0.1, user_similarity, model);
 			UserBasedRecommender userBasedRecommender = new GenericUserBasedRecommender(model, user_neighborhood, user_similarity);

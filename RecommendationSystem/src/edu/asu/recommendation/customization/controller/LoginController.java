@@ -1,8 +1,12 @@
 package edu.asu.recommendation.customization.controller;
 
+import java.net.MalformedURLException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,8 +22,7 @@ import edu.asu.recommendation.customization.service.*;
 
 
 	@Controller
-	public class LoginController 
-	{
+	public class LoginController {
 		
 		@Autowired
 		private UserService userService;
@@ -32,7 +35,7 @@ import edu.asu.recommendation.customization.service.*;
 
 		
 		@RequestMapping(value="/Welcome", method=RequestMethod.POST)
-	    public ModelAndView userLogin(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpSession sessionID)
+	    public ModelAndView userLogin(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpServletRequest request, HttpSession sessionID)
 	    {
 			boolean isFormValidationSucccess = validateLoginFields(userName, passWord);	
 			if(isFormValidationSucccess == true)
@@ -41,6 +44,12 @@ import edu.asu.recommendation.customization.service.*;
 				if(isLoginSuccess == true)
 				{
 					sessionID.setAttribute("userName", userName);
+					UserDTO uDTO = userService.getUserDTO(userName);
+					sessionID.setAttribute("userId", uDTO.getUserId());
+					sessionID.setAttribute("orgName", uDTO.getOrgName());
+					
+					System.out.println(request.getServletContext().getRealPath("/WEB-INF/Template.csv"));
+					
 					return new ModelAndView("/TemplateSearchScreen");
 				}
 			}
@@ -56,6 +65,15 @@ import edu.asu.recommendation.customization.service.*;
 			}
 			return true;
 		}
+		
+		/*@RequestMapping(value="/GUI", method=RequestMethod.POST)
+		public ModelAndView showGUI(@RequestParam("templateId") Integer templateId, @RequestParam("guiId") Integer guiId, HttpSession sessionID, ModelMap model)
+		{
+			
+			return new ModelAndView("/Welcome");
+			
+		}*/
+		
 }
 	 
 	 

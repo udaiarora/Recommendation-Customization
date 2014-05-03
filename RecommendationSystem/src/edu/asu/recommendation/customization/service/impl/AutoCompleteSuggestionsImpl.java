@@ -19,7 +19,7 @@ public class AutoCompleteSuggestionsImpl implements AutoCompleteSuggestions
 	@Override
 	public String[] getAutoCompleteSuggestions(HashMap<String,String> IDtoName) throws Exception 
 	{
-		BufferedReader reader = new BufferedReader(new FileReader("G:\\Spring 2014\\Software Design\\Recommendation-Customization\\RecommendationSystem\\WebContent\\Template.csv"));
+		//BufferedReader reader = new BufferedReader(new FileReader( "\Template.csv"));
 
 		
 		String[] tempnames=new String[IDtoName.size()];
@@ -31,7 +31,7 @@ public class AutoCompleteSuggestionsImpl implements AutoCompleteSuggestions
 			 System.out.println(tempnames[i-1]);
 		}
 		
-		reader.close();
+		//reader.close();
 		return tempnames;
 	}
 
