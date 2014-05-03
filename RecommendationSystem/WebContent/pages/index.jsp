@@ -28,7 +28,7 @@
 
 				<input name="username"  type="text" class="form-control" style="position:absolute;width:200px;left:611px;top:250px;z-index:2" placeholder="Username" maxlength="30"/>
 				<input name	="password" type="password" class="form-control"  style="position:absolute;width:200px;left:612px;top:292px;z-index:3" placeholder="Password" maxlength="15"/>
-
+				
 				<input name="login" type="submit" value="Log In" style="position:absolute;left:630px;top:350px;z-index:4;" class = "btn btn-primary"/>
 				<input name="login" type="reset" value="Reset" style="position:absolute;left:730px;top:350px;z-index:4;" class = "btn btn-primary"/>
 				

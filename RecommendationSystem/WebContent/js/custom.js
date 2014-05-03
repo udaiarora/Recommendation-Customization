@@ -116,7 +116,9 @@ $(document).ready(function(){
 		getRecos();
 	})
 
-
+	$("#customize_button").on("click", function(){
+		alert("The following are persisted to DB: "+global_temps);
+	})
 
 });
 

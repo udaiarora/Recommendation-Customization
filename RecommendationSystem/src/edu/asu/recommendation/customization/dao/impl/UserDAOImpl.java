@@ -10,8 +10,7 @@ import edu.asu.recommendation.customization.dao.UserDAO;
 import edu.asu.recommendation.customization.dto.UserDTO;
 
 @Repository
-public class UserDAOImpl implements UserDAO 	
-{
+public class UserDAOImpl implements UserDAO 	{
 	
 	@Autowired
 	private SessionFactory sessionFactory;

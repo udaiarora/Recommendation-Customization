@@ -6,6 +6,7 @@
 package edu.asu.recommendation.customization.dto;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -26,7 +27,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "ServicesComponentDTO.findByTemplatecomponentrelationshipId", query = "SELECT s FROM ServicesComponentDTO s WHERE s.servicesComponentDTOPK.templatecomponentrelationshipId = :templatecomponentrelationshipId"),
     @NamedQuery(name = "ServicesComponentDTO.findByServiceId", query = "SELECT s FROM ServicesComponentDTO s WHERE s.servicesComponentDTOPK.serviceId = :serviceId"),
     @NamedQuery(name = "ServicesComponentDTO.findByServiceName", query = "SELECT s FROM ServicesComponentDTO s WHERE s.serviceName = :serviceName"),
-    @NamedQuery(name = "ServicesComponentDTO.findByServiceInputdatatype", query = "SELECT s FROM ServicesComponentDTO s WHERE s.serviceInputdatatype = :serviceInputdatatype"),
+    @NamedQuery(name = "ServicesComponentDTO.findByServiceInputdatatype1", query = "SELECT s FROM ServicesComponentDTO s WHERE s.serviceInputdatatype1 = :serviceInputdatatype1"),
+    @NamedQuery(name = "ServicesComponentDTO.findByServiceInputdatatype2", query = "SELECT s FROM ServicesComponentDTO s WHERE s.serviceInputdatatype2 = :serviceInputdatatype2"),
+    @NamedQuery(name = "ServicesComponentDTO.findByServiceInputdatatype3", query = "SELECT s FROM ServicesComponentDTO s WHERE s.serviceInputdatatype3 = :serviceInputdatatype3"),
     @NamedQuery(name = "ServicesComponentDTO.findByServiceOutputdatatype", query = "SELECT s FROM ServicesComponentDTO s WHERE s.serviceOutputdatatype = :serviceOutputdatatype"),
     @NamedQuery(name = "ServicesComponentDTO.findByServiceDescription", query = "SELECT s FROM ServicesComponentDTO s WHERE s.serviceDescription = :serviceDescription"),
     @NamedQuery(name = "ServicesComponentDTO.findByCustomizationType", query = "SELECT s FROM ServicesComponentDTO s WHERE s.customizationType = :customizationType")})
@@ -35,9 +38,13 @@ public class ServicesComponentDTO implements Serializable {
     @EmbeddedId
     protected ServicesComponentDTOPK servicesComponentDTOPK;
     @Column(name = "service_name")
-    private Integer serviceName;
-    @Column(name = "service_inputdatatype")
-    private String serviceInputdatatype;
+    private String serviceName;
+    @Column(name = "service_inputdatatype1")
+    private String serviceInputdatatype1;
+    @Column(name = "service_inputdatatype2")
+    private String serviceInputdatatype2;
+    @Column(name = "service_inputdatatype3")
+    private String serviceInputdatatype3;
     @Column(name = "service_outputdatatype")
     private String serviceOutputdatatype;
     @Column(name = "service_description")
@@ -70,20 +77,37 @@ public class ServicesComponentDTO implements Serializable {
         this.servicesComponentDTOPK = servicesComponentDTOPK;
     }
 
-    public Integer getServiceName() {
+    public String getServiceName() {
         return serviceName;
     }
 
-    public void setServiceName(Integer serviceName) {
+    public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
 
-    public String getServiceInputdatatype() {
-        return serviceInputdatatype;
+    public String getServiceInputdatatype1() {
+        return serviceInputdatatype1;
+    }
+    
+    public String getServiceInputdatatype2() {
+        return serviceInputdatatype2;
     }
 
-    public void setServiceInputdatatype(String serviceInputdatatype) {
-        this.serviceInputdatatype = serviceInputdatatype;
+    public String getServiceInputdatatype3() {
+        return serviceInputdatatype3;
+    }
+
+
+    public void setServiceInputdatatype1(String serviceInputdatatype1) {
+        this.serviceInputdatatype1 = serviceInputdatatype1;
+    }
+
+    public void setServiceInputdatatype2(String serviceInputdatatype2) {
+        this.serviceInputdatatype2 = serviceInputdatatype2;
+    }
+
+    public void setServiceInputdatatype3(String serviceInputdatatype3) {
+        this.serviceInputdatatype3 = serviceInputdatatype3;
     }
 
     public String getServiceOutputdatatype() {

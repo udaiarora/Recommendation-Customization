@@ -1,5 +1,6 @@
 package edu.asu.recommendation.customization.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.asu.recommendation.customization.dto.GuiComponentDTO;
 import edu.asu.recommendation.customization.dto.TemplatesDTO;
+import edu.asu.recommendation.customization.dto.ServicesComponentDTO;
 import edu.asu.recommendation.customization.dto.UserDTO;
 import edu.asu.recommendation.customization.model.GUIComponentModel;
+import edu.asu.recommendation.customization.model.ServiceComponentModel;
 import edu.asu.recommendation.customization.service.*;
 import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 
@@ -35,24 +38,42 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 		@Autowired
 		private TemplateService templateService;
 		
-		@RequestMapping(value="/CustomizeGUI", method=RequestMethod.GET)
-		public String customizeGUI(@ModelAttribute("guiModel") GUIComponentModel guiModel, @RequestParam("templateId") String templateId, @RequestParam("guiId") String guiId, BindingResult result, HttpSession sessionID, ModelMap model)
+		@Autowired
+		private DataModelService dataModelService;
+		
+		@Autowired
+		private ServiceComponentService serviceComponentService;
+		
+		@RequestMapping(value="/CustomizeGUI", method=RequestMethod.POST)
+		public String customizeGUI(@ModelAttribute("guiModel") GUIComponentModel guiModel, @RequestParam("templateId") String templateId, BindingResult result, HttpSession sessionID, ModelMap model)
 	    {
 			Integer userId = (Integer) sessionID.getAttribute("userId");
-			//String userName = (String) sessionID.getAttribute("userName");
-			System.out.println(userId + " " + templateId + " " + guiId);
-			//TemplatesDTO tDTO = templateService.getTemplateDTO(uDTO.getUserId(), templateId);
+			//System.out.println(userId + " " + templateId + " " + guiId);
 			GuiComponentDTO gDTO = guiService.getGUIComponent(userId, Integer.parseInt(templateId));
 			
-			//System.out.println("GuiAttribute1 " + guiModel.getGuiAttribute1() + " GuiAttrValue1 " + guiModel.getGuiAttrValue1());
+		
 			guiModel = copyDtoToModel(gDTO, guiModel);
 			guiModel.setUserId(userId);
 			guiModel.setTemplateId(Integer.parseInt(templateId));
 			model.addAttribute("guiModel", guiModel);
-			//return gDTO.getUrl();
-			return "/templates/gui/BookSearch";
+			return gDTO.getUrl();
 	    }
 	
+@RequestMapping(value="/CustomizeService", method=RequestMethod.POST)
+	public String customizeService(@ModelAttribute("serviceModel") ServiceComponentModel serviceModel, @RequestParam("templateId") String templateId, BindingResult result, HttpSession sessionID, ModelMap model)
+	{
+		Integer userId = (Integer) sessionID.getAttribute("userId");
+		System.out.println("userID" + userId + "templateID: " + templateId);
+		ServicesComponentDTO servDTO = serviceComponentService.getServiceAttributes(userId, Integer.parseInt(templateId));
+		System.out.println("In Controller : getServiceInputdatatype1 " + servDTO.getServiceInputdatatype1() + " getServiceInputdatatype2 " + servDTO.getServiceInputdatatype1());
+		//serviceModel = copyServiceModelToDTO(serviceModel);
+		serviceModel = copyServDTOtoModel(servDTO, serviceModel);
+		serviceModel.setUserId(userId);
+		serviceModel.setTemplateId(Integer.parseInt(templateId));
+		model.addAttribute("serviceModel", serviceModel);
+		return "/templates/service/ServiceComponentCustomization";
+
+	}
 		@RequestMapping(value="/updateGUI", method=RequestMethod.POST)
 		public String updateGUI(@ModelAttribute("guiModel") GUIComponentModel guiModel, BindingResult result, HttpSession sessionID, ModelMap model)
 		{
@@ -62,6 +83,7 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			GuiComponentDTO guiDTO = guiService.getGUIComponent(guiModel.getUserId(), guiModel.getTemplateId());
 			guiDTO.setGuiAttrValue1(guiModel.getGuiAttrValue1());
 			guiDTO.setGuiAttrValue2(guiModel.getGuiAttrValue2());
+			guiDTO.setGuiAttrValue3(guiModel.getGuiAttrValue3());
 			if(guiDTO.getUserID().getUserId() == -1)
 			{
 				GuiComponentDTO gDTO = new GuiComponentDTO();
@@ -90,17 +112,81 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			return guiDTO.getUrl();
 		}
 		
+	
+		
 		@RequestMapping(value="/showTemplates", method=RequestMethod.POST)
 		public String showTemplates(ModelMap model, HttpSession sessionID)
 		{
 			Integer userId = (Integer) sessionID.getAttribute("userId");
 			List<TemplatesDTO> templatesList = templateService.getTemplateList(userId);
+			List<String> componentsList = new ArrayList<String>();
 			for(TemplatesDTO t : templatesList)
 			{
+				componentsList = templateService.getComponentsList(userId, t.getTemplateId(), componentsList);
+				for(String s : componentsList)
+				{
+					System.out.println("Component List = " + s);
+				}
+				System.out.println("");
 				System.out.println(t.getTemplateName());
 			}
+			List<String> componentTypes = new ArrayList<String>();
+			componentTypes.add("GUI");
+			componentTypes.add("WorkFlow");
+			componentTypes.add("Service");
+			componentTypes.add("DataModel");
+			model.addAttribute("componentTypes", componentTypes);
+			model.addAttribute("componentsList", componentsList);
+			model.addAttribute("templatesList", templatesList);
 			return "/templates";
 		}
+		
+	@RequestMapping(value="/updateService", method=RequestMethod.POST)
+	public String updateService(@ModelAttribute("serviceModel") ServiceComponentModel serviceModel, BindingResult result,  HttpSession sessionID, ModelMap model)
+	{
+
+		System.out.println(serviceModel.getserviceInputdatatype1());
+		System.out.println(serviceModel.getUserId() + " " + serviceModel.getTemplateId());
+		ServicesComponentDTO servDTO = serviceComponentService.getServiceAttributes(serviceModel.getUserId(), serviceModel.getTemplateId());
+
+		servDTO.setServiceInputdatatype1(serviceModel.getserviceInputdatatype1());
+		servDTO.setServiceInputdatatype2(serviceModel.getserviceInputdatatype2());
+		servDTO.setServiceInputdatatype3(serviceModel.getserviceInputdatatype3());
+		servDTO.setServiceOutputdatatype(serviceModel.getserviceOutputdatatype());
+		servDTO.setServiceName(serviceModel.getServiceName());
+		servDTO.setServiceDescription(serviceModel.getserviceDescription());
+		boolean status = serviceComponentService.updateServiceAttributes(servDTO);
+		System.out.println("serviceModel.getserviceDescription()" + serviceModel.getserviceDescription());
+		System.out.println("serviceModel.getServiceName()" + serviceModel.getServiceName());
+		if(servDTO.getUserID().getUserId() == -1)
+		{
+			ServicesComponentDTO sDTO = new ServicesComponentDTO();
+			UserDTO uDTO = userService.getUserDTO((String) sessionID.getAttribute("userName"));
+			sDTO.setUserID(uDTO);
+			sDTO.setServiceInputdatatype1(servDTO.getServiceInputdatatype1());
+			sDTO.setServiceInputdatatype2(servDTO.getServiceInputdatatype2());
+			sDTO.setServiceInputdatatype3(servDTO.getServiceInputdatatype3());
+			sDTO.setServiceOutputdatatype(servDTO.getServiceOutputdatatype());
+			sDTO.setServiceDescription(servDTO.getServiceDescription());
+			sDTO.setServiceName(servDTO.getServiceName());
+			status = serviceComponentService.updateServiceAttributes(sDTO);
+
+		}
+		else
+		{
+
+			status = serviceComponentService.updateServiceAttributes(servDTO);
+
+			if(status == true)
+			{
+				System.out.println("True");
+			}
+			
+		}
+		return "/templates/service/ServiceComponentCustomization";
+	}
+	
+
 		
 		public GUIComponentModel copyDtoToModel(GuiComponentDTO gDTO, GUIComponentModel guiModel)
 		{
@@ -117,6 +203,19 @@ import edu.asu.recommendation.customization.service.impl.UserServiceImpl;
 			return guiModel;
 		}
 		
+		public ServiceComponentModel copyServDTOtoModel(ServicesComponentDTO servDTO, ServiceComponentModel servModel)
+	{
+
+		servModel.setserviceInputdatatype1(servDTO.getServiceInputdatatype1());
+		servModel.setserviceInputdatatype2(servDTO.getServiceInputdatatype2());
+		servModel.setserviceInputdatatype3(servDTO.getServiceInputdatatype3());
+		servModel.setserviceOutputdatatype(servDTO.getServiceOutputdatatype());
+		servModel.setServiceName(servDTO.getServiceName());
+		servModel.setserviceDescription(servDTO.getServiceDescription());
+
+		return servModel;
+	}
+
 		public GuiComponentDTO copyModelToDTO(GUIComponentModel guiModel)
 		{
 			GuiComponentDTO guiDTO = new GuiComponentDTO();

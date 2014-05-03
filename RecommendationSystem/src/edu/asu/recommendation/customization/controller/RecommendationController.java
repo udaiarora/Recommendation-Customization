@@ -10,11 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,19 +44,19 @@ public class RecommendationController
 	private HashMap<String,String> NametoID=new HashMap<String,String>();;
 	
 	@RequestMapping(value="/GetAutocompleteSuggestions", method=RequestMethod.GET)
-	public @ResponseBody Template getAutoCompleteSuggestions() throws Exception
+	public @ResponseBody Template getAutoCompleteSuggestions(HttpServletRequest request) throws Exception
 	{
 		//System.out.println(Long.valueOf("100").longValue());
-		buildHashMaps();
+		buildHashMaps(request.getSession().getServletContext().getRealPath("/"));
 		String[] ResultArray=AutoCompleteImplOBj.getAutoCompleteSuggestions(IDtoName);
 		return new Template(ResultArray);
 		
 	}
 	
-	private void buildHashMaps() throws Exception 
+	private void buildHashMaps(String contextPath) throws Exception 
 	{
 		// TODO Auto-generated method stub
-		BufferedReader reader = new BufferedReader(new FileReader("G:\\Spring 2014\\Software Design\\Recommendation-Customization\\RecommendationSystem\\WebContent\\Template.csv"));
+		BufferedReader reader = new BufferedReader(new FileReader(contextPath + "/Template.csv"));
 		String line = null;
 		String splitbycomma = ",";
 		String [] OnelineData= {};
@@ -73,7 +75,7 @@ public class RecommendationController
 	}
 
 	@RequestMapping(value="/GetRecommendations", method=RequestMethod.GET)
-    public  @ResponseBody Template addTemplates(@RequestParam("attribute") String[] usersChoices,HttpSession sessionID) throws Exception
+    public  @ResponseBody Template addTemplates(@RequestParam("attribute") String[] usersChoices, HttpServletRequest request, HttpSession sessionID) throws Exception
     {
 			String username = (String)sessionID.getAttribute("userName");
 			System.out.println("The username is "+username );
@@ -82,14 +84,14 @@ public class RecommendationController
 			System.out.println("The user id is"+ user_id);
 		    String userid="100";
 		    user_id=100;
-			updateCSVfile(String.valueOf(user_id),usersChoices);
+			updateCSVfile(String.valueOf(user_id),usersChoices, request.getSession().getServletContext().getRealPath("/"));
 			ArrayList<Integer> tempIDs=getTemplateIDS(usersChoices);
 			for(String s: usersChoices)
 			{
 				System.out.println("The user selected"+ s);
 			}
 			
-			List<RecommendedItem> list = recommendationImplOBj.recommendTemplates(user_id, tempIDs);
+			List<RecommendedItem> list = recommendationImplOBj.recommendTemplates(user_id, request.getSession().getServletContext().getRealPath("/"), tempIDs);
 			System.out.println("size of all_items is"+list.size());
 			//take template IDs from recommenderlist, lookup for template names on HashMAP and send it to the browser in the form of string array.
 			String[] recommendedItemNames=new String[list.size()];
@@ -107,10 +109,10 @@ public class RecommendationController
 			return new Template(recommendedItemNames);
 	}
 
-	private void updateCSVfile(String userID,String[] usersChoices) throws Exception 
+	private void updateCSVfile(String userID,String[] usersChoices, String contextPath) throws Exception 
 	{
-		BufferedReader br = new BufferedReader(new FileReader("G:\\Spring 2014\\Software Design\\Recommendation-Customization\\RecommendationSystem\\WebContent\\HistoricalData_revised.csv"));
-		FileWriter writer= new FileWriter("G:\\Spring 2014\\Software Design\\Recommendation-Customization\\RecommendationSystem\\WebContent\\temporary.csv");
+		BufferedReader br = new BufferedReader(new FileReader(contextPath + "/HistoricalData_revised.csv"));
+		FileWriter writer= new FileWriter(contextPath + "/temporary.csv");
 		String line = "";
 		String cvsSplitBy = ",";
 		while ((line = br.readLine()) != null) 
